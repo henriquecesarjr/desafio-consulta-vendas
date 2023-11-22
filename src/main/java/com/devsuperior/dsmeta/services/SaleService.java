@@ -28,13 +28,13 @@ public class SaleService {
 		return new SaleMinDTO(entity);
 	}
 
-	public Page<SaleSummaryDTO> findSummaries(String minDate, String maxDate, String name, Pageable pageable) {
+	public Page<SaleSummaryDTO> findSummaries(String minDate, String maxDate, Pageable pageable) {
 
 		LocalDate minhaData = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
 
 		LocalDate result = minDate.equals("") ? minhaData.minusYears(1L) : LocalDate.parse(minDate);
 		LocalDate today = maxDate.equals("") ? LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault()) : LocalDate.parse(maxDate);
 
-		return repository.searchSummaries(result, today, name, pageable);
+		return repository.searchSummaries(result, today, pageable);
 	}
 }

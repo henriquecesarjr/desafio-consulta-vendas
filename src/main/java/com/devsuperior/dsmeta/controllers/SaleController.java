@@ -24,17 +24,15 @@ public class SaleController {
 	}
 
 	@GetMapping(value = "/report")
-	public ResponseEntity<Page<SaleSummaryDTO>> getReport(@RequestParam(name = "name", defaultValue = "") String name,
-			                                          @RequestParam(name = "minDate", defaultValue = "") String minDate,
-													  @RequestParam(name = "maxDate", defaultValue = "") String maxDate,
-													  Pageable pageable){
-		Page<SaleSummaryDTO> dto = service.findSummaries(minDate, maxDate, name, pageable);
-		return ResponseEntity.ok(dto);
+	public ResponseEntity<?> getReport(){
+		return null;
 	}
 
 	@GetMapping(value = "/summary")
-	public ResponseEntity<?> getSummary() {
-		// TODO
-		return null;
+	public ResponseEntity<Page<SaleSummaryDTO>> getSummary( @RequestParam(name = "minDate", defaultValue = "") String minDate,
+															@RequestParam(name = "maxDate", defaultValue = "") String maxDate,
+															Pageable pageable) {
+		Page<SaleSummaryDTO> dto = service.findSummaries(minDate, maxDate, pageable);
+		return ResponseEntity.ok(dto);
 	}
 }
